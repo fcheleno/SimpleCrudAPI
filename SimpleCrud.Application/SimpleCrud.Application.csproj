@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aloha.CQRS.Commands" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleCrud.Core\SimpleCrud.Core.csproj" />
+    <ProjectReference Include="..\SimpleCrud.Domain\SimpleCrud.Domain.csproj" />
+    <ProjectReference Include="..\SimpleCrud.Infrastrucure.Adapters\SimpleCrud.Infrastrucure.Adapter.csproj" />
+  </ItemGroup>
+
+</Project>
