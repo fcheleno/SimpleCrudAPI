@@ -4,9 +4,8 @@
     [Name] [varchar](50) NOT NULL, 
     [LastName] [varchar](100) NULL, 
     [Mail] [varchar](100) NULL, 
-    [CreateDate] [datetime] NULL, 
-    [UpdateDate] [datetime] NULL, 
-    [Active] [bit] NOT NULL DEFAULT 1
+    [CreateDate] [datetime] NOT NULL, 
+    [UpdateDate] [datetime] NULL
 PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

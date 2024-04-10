@@ -2,10 +2,9 @@
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](100) NOT NULL,
 	[Value] [decimal](18, 2) NULL,	
-    [CreateDate] [datetime] NULL, 
-    [UpdateDate] [datetime] NULL, 
-	[ClientId] [int] NULL,
-	[Active] [bit] NOT NULL DEFAULT 1,
+	[ClientId] [int] NOT NULL,
+    [CreateDate] [datetime] NOT NULL, 
+    [UpdateDate] [datetime] NULL, 	
 PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

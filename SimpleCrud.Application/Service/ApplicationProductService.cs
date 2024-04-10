@@ -16,27 +16,29 @@ namespace SimpleCrud.Application.Service
             _productMapper = productMapper;
         }       
 
-        public ProductDto GetById(int id)
+        public ProductViewDto GetById(int id)
         {
             var product = _productService.GetById(id);
-            return _productMapper.MapperToDto(product);
+            return _productMapper.MapperToViewDto(product);
         }
 
-        public IEnumerable<ProductDto> GetAll()
+        public IEnumerable<ProductViewDto> GetAll()
         {
             var products = _productService.GetAll();
-            return _productMapper.MapperProductList(products);
+            return _productMapper.MapperProductViewList(products);
         }
 
-        public void Add(ProductDto productDto)
+        public void Add(ProductCreateDto productDto)
         {
-            var produto = _productMapper.MapperToEntity(productDto);
-            _productService.Add(produto);
+            var product = _productMapper.MapperToEntity(productDto);
+            product.CreateDate = DateTime.Now;
+            _productService.Add(product);
         }
 
         public void Update(ProductDto productDto)
         {
             var product = _productMapper.MapperToEntity(productDto);
+            product.UpdateDate = DateTime.Now;
             _productService.Update(product);
         }
 

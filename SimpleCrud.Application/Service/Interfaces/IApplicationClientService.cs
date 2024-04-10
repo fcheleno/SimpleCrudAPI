@@ -4,11 +4,11 @@ namespace SimpleCrud.Application.Service.Interfaces
 {
     public interface IApplicationClientService
     {
-        ClientDto GetById(int id);
+        ClientViewDto GetById(int id);
 
-        IEnumerable<ClientDto> GetAll();
+        IEnumerable<ClientViewDto> GetAll();
 
-        void Add(ClientDto obj);
+        void Add(ClientCreateDto obj);
 
         void Update(ClientDto obj);
 

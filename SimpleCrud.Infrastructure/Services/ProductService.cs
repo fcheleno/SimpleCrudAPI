@@ -1,7 +1,6 @@
 ﻿using SimpleCrud.Core.Interfaces.Repositories;
 using SimpleCrud.Core.Interfaces.Services;
 using SimpleCrud.Domain.Models;
-using SimpleCrud.Infrastructure.Repositories;
 
 namespace SimpleCrud.Infrastructure.Services
 {

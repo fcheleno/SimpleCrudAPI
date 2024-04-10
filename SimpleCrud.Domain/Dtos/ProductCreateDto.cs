@@ -2,15 +2,13 @@
 
 namespace SimpleCrud.Domain.Dtos
 {
-    public class ProductDto
+    public class ProductCreateDto
     {
-        public int? Id { get; set; }
-
         [Required]
         public string Name { get; set; }
-
+        
         public decimal Value { get; set; }
-
+        
         [Required]
         public int ClientId { get; set; }
     }

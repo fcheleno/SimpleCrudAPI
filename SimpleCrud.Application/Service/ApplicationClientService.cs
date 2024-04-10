@@ -16,27 +16,29 @@ namespace SimpleCrud.Application.Service
             _clientMapper = clientMapper;
         }
 
-        public ClientDto GetById(int id)
+        public ClientViewDto GetById(int id)
         {
             var client = _clientService.GetById(id);
-            return _clientMapper.MapperToDto(client);
+            return _clientMapper.MapperToViewDto(client);
         }
 
-        public IEnumerable<ClientDto> GetAll()
+        public IEnumerable<ClientViewDto> GetAll()
         {
             var clients = _clientService.GetAll();
-            return _clientMapper.MapperClientList(clients);
+            return _clientMapper.MapperClientViewList(clients);
         }   
 
-        public void Add(ClientDto clientDto)
+        public void Add(ClientCreateDto clientDto)
         {
             var client = _clientMapper.MapperToEntity(clientDto);
+            client.CreateDate = DateTime.Now;
             _clientService.Add(client);
         }
 
         public void Update(ClientDto clientDto)
         {
             var client = _clientMapper.MapperToEntity(clientDto);
+            client.UpdateDate = DateTime.Now;
             _clientService.Update(client);
         }
 

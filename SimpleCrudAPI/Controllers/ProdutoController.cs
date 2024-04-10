@@ -18,23 +18,42 @@ namespace SimpleCrudAPI.Controllers
         }
 
         /// <summary>
-        /// Recuperar Produto por Id
+        /// Recuperar o Produto por Id
         /// </summary>
         /// <param name="id">Id do Produto</param>
         [HttpGet]
         public IActionResult Get(int id)
         {
-            return Ok(_applicationProductService.GetById(id));
+            try
+            {
+                if (id == 0)
+                    return NotFound();
+
+                return Ok(_applicationProductService.GetById(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
+        /// <summary>
+        /// Recuperar todos os Produtos cadastrados
+        /// </summary>
         [HttpGet("all")]
         public IActionResult GetAll()
         {
             return Ok(_applicationProductService.GetAll());
         }
 
+        /// <summary>
+        /// Cadastrar o Produto 
+        /// </summary>
+        /// <param name="Name">Nome do Produto</param>
+        /// <param name="value">Valor do Produto</param>
+        /// <param name="ClientId">ClientId do Produto</param>
         [HttpPost]
-        public IActionResult Post([FromBody] ProductDto productDto)
+        public IActionResult Post([FromBody] ProductCreateDto productDto)
         {
             try
             {
@@ -44,12 +63,19 @@ namespace SimpleCrudAPI.Controllers
                 _applicationProductService.Add(productDto);
                 return Ok("Produto cadastrado com sucesso!");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return BadRequest(ex.Message);
             }
         }
 
+        /// <summary>
+        /// Atualizar o Produto 
+        /// </summary>
+        /// <param name="id">Id do Produto</param>
+        /// <param name="Name">Nome do Produto</param>
+        /// <param name="value">Valor do Produto</param>
+        /// <param name="ClientId">ClientId do Produto</param>
         [HttpPut]
         public IActionResult Put([FromBody] ProductDto productDto)
         {
@@ -61,26 +87,33 @@ namespace SimpleCrudAPI.Controllers
                 _applicationProductService.Update(productDto);
                 return Ok("Produto atualizado com sucesso!");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return BadRequest(ex.Message);
             }
         }
 
+        /// <summary>
+        /// Excluir o Produto 
+        /// </summary>
+        /// <param name="id">Id do Produto</param>
         [HttpDelete]
-        public IActionResult Delete([FromBody] ProductDto productDto)
+        public IActionResult Delete(int id)
         {
             try
             {
-                if (productDto == null)
+                if (id == 0)
                     return NotFound();
+
+                var productDto = new ProductDto();
+                productDto.Id = id;                
 
                 _applicationProductService.Remove(productDto);
                 return Ok("Produto removido com sucesso!");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return BadRequest(ex.Message);
             }
         }
     }
