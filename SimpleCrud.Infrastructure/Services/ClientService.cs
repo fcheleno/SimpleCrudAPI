@@ -6,7 +6,7 @@ namespace SimpleCrud.Infrastructure.Services
 {
     public class ClientService : BaseService<Client>, IClientService
     {
-        public readonly IClientRepository _clientRepository;
+        private readonly IClientRepository _clientRepository;
 
         public ClientService(IClientRepository ClientRepository) : base(ClientRepository)
         {

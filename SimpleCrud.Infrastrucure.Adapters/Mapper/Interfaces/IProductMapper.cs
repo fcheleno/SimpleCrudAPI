@@ -7,8 +7,14 @@ namespace SimpleCrud.Infrastructure.Adapters.Mapper.Interfaces
     {
         Product MapperToEntity(ProductDto productDto);
 
+        Product MapperToEntity(ProductCreateDto productDto);
+
         IEnumerable<ProductDto> MapperProductList(IEnumerable<Product> products);
 
+        IEnumerable<ProductViewDto> MapperProductViewList(IEnumerable<Product> products);
+
         ProductDto MapperToDto(Product product);
+        
+        ProductViewDto MapperToViewDto(Product product);
     }
 }

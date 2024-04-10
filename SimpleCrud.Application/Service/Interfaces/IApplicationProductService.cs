@@ -4,11 +4,11 @@ namespace SimpleCrud.Application.Service.Interfaces
 {
     public interface IApplicationProductService
     {
-        ProductDto GetById(int id);
+        ProductViewDto GetById(int id);
 
-        IEnumerable<ProductDto> GetAll();
+        IEnumerable<ProductViewDto> GetAll();
 
-        void Add(ProductDto obj);
+        void Add(ProductCreateDto obj);
 
         void Update(ProductDto obj);
 

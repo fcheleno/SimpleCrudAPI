@@ -15,7 +15,7 @@ namespace SimpleCrud.Infrastructure.Data
 
         public override int SaveChanges()
         {
-            foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("CreateDate") != null)) //todo: verificar mais tarde
+            foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("CreateDate") != null))
             {
                 if (entry.State == EntityState.Added)
                 {
