@@ -31,4 +31,5 @@ namespace SimpleCrud.Infrastructure.Data
             return base.SaveChanges();
         }
     }
+
 }

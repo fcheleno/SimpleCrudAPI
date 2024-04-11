@@ -7,20 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aloha" Version="2.0.5" />
     <PackageReference Include="Autofac" Version="8.0.0" />
-    <PackageReference Include="DapperExtensions" Version="1.7.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="MySqlConnector" Version="2.3.6" />
-    <PackageReference Include="System.Linq" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SimpleCrud.Application\SimpleCrud.Application.csproj" />
     <ProjectReference Include="..\SimpleCrud.Core\SimpleCrud.Core.csproj" />
+    <ProjectReference Include="..\SimpleCrud.Infrastructure.Data\SimpleCrud.Infrastructure.Data.csproj" />
     <ProjectReference Include="..\SimpleCrud.Infrastrucure.Adapters\SimpleCrud.Infrastrucure.Adapter.csproj" />
   </ItemGroup>
 
