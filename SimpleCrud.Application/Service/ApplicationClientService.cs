@@ -19,6 +19,8 @@ namespace SimpleCrud.Application.Service
         public ClientViewDto GetById(int id)
         {
             var client = _clientService.GetById(id);
+            if (client == null)
+                return new ClientViewDto();
             return _clientMapper.MapperToViewDto(client);
         }
 

@@ -19,6 +19,8 @@ namespace SimpleCrud.Application.Service
         public ProductViewDto GetById(int id)
         {
             var product = _productService.GetById(id);
+            if (product == null) 
+                return new ProductViewDto();
             return _productMapper.MapperToViewDto(product);
         }
 

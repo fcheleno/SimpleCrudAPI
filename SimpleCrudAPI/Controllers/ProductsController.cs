@@ -1,17 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 using SimpleCrud.Application.Service.Interfaces;
 using SimpleCrud.Domain.Dtos;
+using System.Net;
 
 namespace SimpleCrudAPI.Controllers
 {
+    /// <summary>
+    /// Products Controller
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class ProdutoController : ControllerBase
+    public class ProductsController : ControllerBase
     {
-        private readonly ILogger<ProdutoController> _logger;
+        private readonly ILogger<ProductsController> _logger;
         private readonly IApplicationProductService _applicationProductService;
 
-        public ProdutoController(ILogger<ProdutoController> logger, IApplicationProductService applicationProductService)
+        public ProductsController(ILogger<ProductsController> logger, IApplicationProductService applicationProductService)
         {
             _logger = logger;
             _applicationProductService = applicationProductService;
@@ -22,6 +26,9 @@ namespace SimpleCrudAPI.Controllers
         /// </summary>
         /// <param name="id">Id do Produto</param>
         [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public IActionResult Get(int id)
         {
             try
@@ -29,21 +36,37 @@ namespace SimpleCrudAPI.Controllers
                 if (id == 0)
                     return NotFound();
 
-                return Ok(_applicationProductService.GetById(id));
+                var product = _applicationProductService.GetById(id);
+
+                if (product.Id == null)
+                    return NotFound();
+
+                return Ok(product);
             }
-            catch (Exception ex)
+            catch (Exception error)
             {
-                return BadRequest(ex.Message);
+                _logger.LogError(error.Message);
+                throw;
             }
         }
 
         /// <summary>
         /// Recuperar todos os Produtos cadastrados
         /// </summary>
-        [HttpGet("all")]
+        [HttpGet("All-Products")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public IActionResult GetAll()
-        {
-            return Ok(_applicationProductService.GetAll());
+        {            
+            try
+            {
+                return Ok(_applicationProductService.GetAll());
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error.Message);
+                throw;
+            }
         }
 
         /// <summary>
@@ -53,19 +76,23 @@ namespace SimpleCrudAPI.Controllers
         /// <param name="value">Valor do Produto</param>
         /// <param name="ClientId">ClientId do Produto</param>
         [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public IActionResult Post([FromBody] ProductCreateDto productDto)
         {
             try
             {
                 if (productDto == null)
-                    return NotFound();
+                    return BadRequest();
 
                 _applicationProductService.Add(productDto);
                 return Ok("Produto cadastrado com sucesso!");
             }
-            catch (Exception ex)
+            catch (Exception error)
             {
-                return BadRequest(ex.Message);
+                _logger.LogError(error.Message);
+                throw;
             }
         }
 
@@ -77,19 +104,23 @@ namespace SimpleCrudAPI.Controllers
         /// <param name="value">Valor do Produto</param>
         /// <param name="ClientId">ClientId do Produto</param>
         [HttpPut]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public IActionResult Put([FromBody] ProductDto productDto)
         {
             try
             {
                 if (productDto == null)
-                    return NotFound();
+                    return BadRequest();
 
                 _applicationProductService.Update(productDto);
                 return Ok("Produto atualizado com sucesso!");
             }
-            catch (Exception ex)
+            catch (Exception error)
             {
-                return BadRequest(ex.Message);
+                _logger.LogError(error.Message);
+                throw;
             }
         }
 
@@ -98,6 +129,9 @@ namespace SimpleCrudAPI.Controllers
         /// </summary>
         /// <param name="id">Id do Produto</param>
         [HttpDelete]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public IActionResult Delete(int id)
         {
             try
@@ -111,9 +145,10 @@ namespace SimpleCrudAPI.Controllers
                 _applicationProductService.Remove(productDto);
                 return Ok("Produto removido com sucesso!");
             }
-            catch (Exception ex)
+            catch (Exception error)
             {
-                return BadRequest(ex.Message);
+                _logger.LogError(error.Message);
+                throw;
             }
         }
     }
