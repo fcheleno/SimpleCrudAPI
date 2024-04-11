@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  simplecrudapi:
+    image: simplecrudapi
+    depends_on:
+      - sqlserver
+    build:
+      context: .
+      dockerfile: SimpleCrudAPI/Dockerfile
+    ports:
+      - 5250:5250
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "Password.123456"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express" # Define a edição do SQL Server
+    volumes:
+      - ./sql-scripts:/docker-entrypoint-initdb.d # Monta o diretório local sql-scripts no diretório do container
+    ports:
+      - "1433:1433"
